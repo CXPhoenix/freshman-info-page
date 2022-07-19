@@ -119,6 +119,7 @@ export default {
     });
 
     const closeEnAd = () => {
+      window.sessionStorage.setItem("en", true);
       enCampAd.isOpen = false;
     };
 
@@ -138,7 +139,7 @@ export default {
         if (e.target.id === "fastMenu" || e.target.id === "fastMenuBtn") return;
         closeFastMenu();
       };
-      if (window.localStorage.getItem("2022 線上英語閱讀夏令營")) {
+      if (window.sessionStorage.getItem("en")) {
         enCampAd.isOpen = false;
       }
       const url = new URL(
