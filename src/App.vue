@@ -123,10 +123,6 @@ export default {
       enCampAd.isOpen = false;
     };
 
-    const noShowAgain = (title) => {
-      window.localStorage.setItem(title, true);
-    };
-
     const toggle = reactive({ is: true });
     const toggleFastMenu = () => {
       toggle.is = !toggle.is;
