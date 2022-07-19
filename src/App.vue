@@ -79,6 +79,12 @@
         </div>
       </div>
     </div>
+    <!-- ad -->
+    <AdModel
+      v-if="enCampAd.isOpen"
+      :adData="enCampAd"
+      :closeModel="closeEnAd"
+    />
   </div>
 </template>
 
@@ -86,6 +92,7 @@
 import { onMounted, reactive } from "vue";
 import FastMenu from "./components/FastMenu.vue";
 import { fastMenuData, mattersData, arriveData } from "./components/Datas.js";
+import enCampImg from "./assets/en-camp.jpg";
 import HeadBanner from "./components/HeadBanner.vue";
 import TimeLine from "./components/TimeLine.vue";
 import FreshmanRegister from "./components/FreshmanRegister.vue";
@@ -95,6 +102,7 @@ import Matters from "./components/Matters.vue";
 import ArriveDate from "./components/ArriveDate.vue";
 import Publicity from "./components/Publicity.vue";
 import SchoolIntro from "./components/SchoolIntro.vue";
+import AdModel from "./components/AdModel.vue";
 export default {
   setup() {
     const checkTable = reactive({ title: "", link: "" });
@@ -103,6 +111,20 @@ export default {
     const lineGroup = reactive({ title: "", link: "" });
     const summerHomeworkData = reactive({ content: [] });
     const publicityData = reactive({ content: [] });
+    const enCampAd = reactive({
+      title: "2022 線上英語閱讀夏令營",
+      link: "https://forms.gle/tN59dbYeruvLa9uJ8",
+      img: enCampImg,
+      isOpen: true,
+    });
+
+    const closeEnAd = () => {
+      enCampAd.isOpen = false;
+    };
+
+    const noShowAgain = (title) => {
+      window.localStorage.setItem(title, true);
+    };
 
     const toggle = reactive({ is: true });
     const toggleFastMenu = () => {
@@ -116,6 +138,9 @@ export default {
         if (e.target.id === "fastMenu" || e.target.id === "fastMenuBtn") return;
         closeFastMenu();
       };
+      if (window.localStorage.getItem("2022 線上英語閱讀夏令營")) {
+        enCampAd.isOpen = false;
+      }
       const url = new URL(
         "./api/v1/fresh-datas",
         "https://freshman-api.fhsh.tp.edu.tw"
@@ -168,6 +193,9 @@ export default {
       mattersData,
       arriveData,
       publicityData,
+      enCampAd,
+      closeEnAd,
+      noShowAgain,
     };
   },
   components: {
@@ -181,6 +209,7 @@ export default {
     ArriveDate,
     Publicity,
     SchoolIntro,
+    AdModel,
   },
 };
 </script>
