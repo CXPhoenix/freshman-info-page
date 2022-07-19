@@ -1,7 +1,7 @@
 <template>
   <div class="h-screen w-screen overflow-auto bg-s-yello">
     <!-- fast menu -->
-    <div class="fixed top-0 z-40">
+    <div class="fixed top-0 z-10">
       <div
         @click="toggleFastMenu"
         id="fastMenuBtn"

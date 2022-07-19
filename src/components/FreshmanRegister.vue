@@ -44,8 +44,12 @@
         class="relative flex h-[62.5vw] w-[62.5vw] cursor-pointer flex-col items-center justify-center rounded-[20px] bg-[#34559D] p-2 text-center text-[6vw] font-semibold leading-[7vw] md:h-[240px] md:w-[240px] md:text-[20px] md:leading-[28.8px] md:hover:border-[5px] md:hover:border-white"
       >
         <p class="text-white">{{ check.title }}</p>
-        <p class="text-s-red">開始時間: {{ check.announceTime }}</p>
-        <p class="text-white">結束時間: {{ check.expiredTime }}</p>
+        <p class="text-sm text-s-red">
+          開始時間: {{ check.announceTime.split("T").join(" ") }}
+        </p>
+        <p class="text-sm text-white">
+          結束時間: {{ check.expiredTime.split("T").join(" ") }}
+        </p>
         <!-- <p class="pointer-events-none text-[#EC6261]" v-html="check.time"></p>
         <p class="pointer-events-none text-white" v-html="check.title2"></p>
         <p class="pointer-events-none text-[#EC6261]" v-html="check.time2"></p> -->

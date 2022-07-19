@@ -1,13 +1,17 @@
 <template>
   <div
-    class="fixed inset-0 flex h-screen w-screen items-center justify-center overflow-auto bg-black/70 p-4"
+    class="fixed inset-0 z-20 flex h-screen w-screen items-center justify-center overflow-auto bg-black/70 p-4"
   >
     <div
-      class="flex w-full flex-col items-center justify-center gap-10 overflow-auto rounded-lg bg-white px-2 py-3 md:max-w-xl"
+      class="flex max-h-fit flex-col items-center justify-center gap-10 overflow-auto rounded-lg border-8 border-s-yello bg-white p-4 md:max-w-xl"
     >
       <h2 class="text-3xl">宣傳一下!</h2>
-      <a :href="adData.link" class="w-full">
-        <img :src="adData.img" :alt="adData.title" class="h-auto w-full" />
+      <a :href="adData.link" class="mx-auto w-8/12">
+        <img
+          :src="adData.img"
+          :alt="adData.title"
+          class="mx-auto h-auto w-8/12"
+        />
       </a>
       <!-- <div class="flex items-center justify-center">
         <input type="checkbox" name="noShow" id="noShow" v-bind="noShow" />
