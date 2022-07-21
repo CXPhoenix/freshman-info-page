@@ -192,7 +192,6 @@ export default {
       publicityData,
       enCampAd,
       closeEnAd,
-      noShowAgain,
     };
   },
   components: {

@@ -58,7 +58,7 @@ const mattersData = reactive({
       {
         link: "",
         id: "m1-1",
-        title: "新生線上訂購校服<br>(7/21鏈結校務系統)",
+        title: "新生線上訂購校服<br>(7/21鏈結飛宇系統)",
       },
       {
         link: "",
@@ -107,7 +107,7 @@ const mattersData = reactive({
       {
         link: "",
         id: "m3-1",
-        title: "學生住宿申請鏈結表單",
+        title: "學雜費減免申請(7/21鏈結校務系統)",
       },
       {
         link: "",

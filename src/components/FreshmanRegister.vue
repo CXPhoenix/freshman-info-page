@@ -32,7 +32,11 @@
       <a
         v-for="(check, index) in registerData.content.details"
         target="_blank"
-        :href="isAnnounce(check.announceTime) ? check.link : null"
+        :href="
+          isAnnounce(check.announceTime) && !isExpired(check.expiredTime)
+            ? check.link
+            : null
+        "
         :key="index"
         @click="
           !isAnnounce(check.announceTime)
