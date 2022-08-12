@@ -80,7 +80,7 @@
       </div>
     </div>
     <!-- ad -->
-    <AdModel
+    <!-- <AdModel
       v-if="enCampAd.isOpen"
       :adData="enCampAd"
       :closeModel="closeEnAd"
@@ -89,7 +89,7 @@
       v-if="pyCampAd.isOpen"
       :adData="pyCampAd"
       :closeModel="pyCampAd.closeAd"
-    />
+    /> -->
   </div>
 </template>
 
