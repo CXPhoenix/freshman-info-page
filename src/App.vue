@@ -85,6 +85,11 @@
       :adData="enCampAd"
       :closeModel="closeEnAd"
     />
+    <AdModel
+      v-if="pyCampAd.isOpen"
+      :adData="pyCampAd"
+      :closeModel="pyCampAd.closeAd"
+    />
   </div>
 </template>
 
@@ -93,6 +98,7 @@ import { onMounted, reactive } from "vue";
 import FastMenu from "./components/FastMenu.vue";
 import { fastMenuData, mattersData, arriveData } from "./components/Datas.js";
 import enCampImg from "./assets/en-camp.jpg";
+import pyCampImg from "./assets/pycamp.jpg";
 import HeadBanner from "./components/HeadBanner.vue";
 import TimeLine from "./components/TimeLine.vue";
 import FreshmanRegister from "./components/FreshmanRegister.vue";
@@ -117,6 +123,16 @@ export default {
       img: enCampImg,
       isOpen: true,
     });
+    const pyCampAd = reactive({
+      title: "Python 基礎訓練課程",
+      link: "https://forms.gle/Y3RZVsWBbXAnSfaKA",
+      img: pyCampImg,
+      isOpen: true,
+      closeAd: () => {
+        window.sessionStorage.setItem("py", true);
+        pyCampAd.isOpen = false;
+      },
+    });
 
     const closeEnAd = () => {
       window.sessionStorage.setItem("en", true);
@@ -137,6 +153,9 @@ export default {
       };
       if (window.sessionStorage.getItem("en")) {
         enCampAd.isOpen = false;
+      }
+      if (window.sessionStorage.getItem("py")) {
+        pyCampAd.isOpen = false;
       }
       const url = new URL(
         "./api/v1/fresh-datas",
@@ -192,6 +211,7 @@ export default {
       publicityData,
       enCampAd,
       closeEnAd,
+      pyCampAd,
     };
   },
   components: {
@@ -205,6 +225,7 @@ export default {
     ArriveDate,
     Publicity,
     SchoolIntro,
+    AdModel,
     AdModel,
   },
 };
