@@ -90,6 +90,25 @@
       :adData="pyCampAd"
       :closeModel="pyCampAd.closeAd"
     /> -->
+
+    <!-- notice -->
+    <NoticeModel :closeModel="theNotice.closeNotice" v-if="theNotice.isOpen">
+      <h2 class="text-3xl">{{ theNotice.title }}</h2>
+      <p
+        v-for="(content, index) in theNotice.contents"
+        :key="index"
+        class="px-3 text-center text-lg"
+      >
+        {{ content }}
+      </p>
+      <a
+        href="#matters"
+        @click="theNotice.closeNotice"
+        class="rounded-md bg-red-600 py-2 px-4 text-white"
+      >
+        前往區域查看相關說明
+      </a>
+    </NoticeModel>
   </div>
 </template>
 
@@ -109,6 +128,7 @@ import ArriveDate from "./components/ArriveDate.vue";
 import Publicity from "./components/Publicity.vue";
 import SchoolIntro from "./components/SchoolIntro.vue";
 import AdModel from "./components/AdModel.vue";
+import NoticeModel from "./components/NoticeModel.vue";
 export default {
   setup() {
     const checkTable = reactive({ title: "", link: "" });
@@ -117,6 +137,22 @@ export default {
     const lineGroup = reactive({ title: "", link: "" });
     const summerHomeworkData = reactive({ content: [] });
     const publicityData = reactive({ content: [] });
+
+    // Notice 區塊
+    const theNotice = reactive({
+      isOpen: true,
+      title: "重要推播公告",
+      contents: [
+        "新生【訂購校服系統】【填寫新生資料校務系統】延至8月15日截止",
+        "【普通班體育班新生選課】亦延長",
+        "尚未完成新生請速完成(詳見新生專區，下拉至新生應辦選辦事項區)",
+      ],
+      closeNotice: () => {
+        theNotice.isOpen = false;
+      },
+    });
+
+    /* 廣告區塊
     const enCampAd = reactive({
       title: "2022 線上英語閱讀夏令營",
       link: "https://forms.gle/tN59dbYeruvLa9uJ8",
@@ -138,6 +174,7 @@ export default {
       window.sessionStorage.setItem("en", true);
       enCampAd.isOpen = false;
     };
+    */
 
     const toggle = reactive({ is: true });
     const toggleFastMenu = () => {
@@ -151,12 +188,16 @@ export default {
         if (e.target.id === "fastMenu" || e.target.id === "fastMenuBtn") return;
         closeFastMenu();
       };
+
+      /* 廣告區塊設定
       if (window.sessionStorage.getItem("en")) {
         enCampAd.isOpen = false;
       }
       if (window.sessionStorage.getItem("py")) {
         pyCampAd.isOpen = false;
       }
+      */
+
       const url = new URL(
         "./api/v1/fresh-datas",
         "https://freshman-api.fhsh.tp.edu.tw"
@@ -164,7 +205,7 @@ export default {
       const res = await fetch(url);
       const docs = await res.json();
       const allDatas = docs.datas;
-      console.log(allDatas);
+      // console.log(allDatas);
 
       checkTable.title = allDatas[1].details[0].title;
       checkTable.link = allDatas[1].details[0].link;
@@ -209,9 +250,7 @@ export default {
       mattersData,
       arriveData,
       publicityData,
-      enCampAd,
-      closeEnAd,
-      pyCampAd,
+      theNotice,
     };
   },
   components: {
@@ -226,7 +265,7 @@ export default {
     Publicity,
     SchoolIntro,
     AdModel,
-    AdModel,
+    NoticeModel,
   },
 };
 </script>
