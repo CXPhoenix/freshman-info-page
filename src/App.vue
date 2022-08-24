@@ -92,7 +92,13 @@
     /> -->
 
     <!-- notice -->
-    <NoticeModel :closeModel="theNotice.closeNotice" v-if="theNotice.isOpen">
+    <AdModel
+      v-if="theClubIntro.isOpen"
+      :adData="theClubIntro"
+      :closeModel="theClubIntro.closeIntro"
+    />
+
+    <!-- <NoticeModel :closeModel="theNotice.closeNotice" v-if="theNotice.isOpen">
       <h2 class="text-3xl">{{ theNotice.title }}</h2>
       <p
         v-for="(content, index) in theNotice.contents"
@@ -108,7 +114,7 @@
       >
         前往區域查看相關說明
       </a>
-    </NoticeModel>
+    </NoticeModel> -->
   </div>
 </template>
 
@@ -118,6 +124,7 @@ import FastMenu from "./components/FastMenu.vue";
 import { fastMenuData, mattersData, arriveData } from "./components/Datas.js";
 import enCampImg from "./assets/en-camp.jpg";
 import pyCampImg from "./assets/pycamp.jpg";
+import clubIntro from "./assets/clubs_intro.png";
 import HeadBanner from "./components/HeadBanner.vue";
 import TimeLine from "./components/TimeLine.vue";
 import FreshmanRegister from "./components/FreshmanRegister.vue";
@@ -137,6 +144,17 @@ export default {
     const lineGroup = reactive({ title: "", link: "" });
     const summerHomeworkData = reactive({ content: [] });
     const publicityData = reactive({ content: [] });
+
+    //社團博覽會
+    const theClubIntro = reactive({
+      isOpen: true,
+      title: "社團博覽會",
+      link: "https://sites.google.com/view/fhshstudent/%E9%A6%96%E9%A0%81",
+      img: clubIntro,
+      closeIntro: () => {
+        theClubIntro.isOpen = false;
+      },
+    });
 
     // Notice 區塊
     const theNotice = reactive({
@@ -251,6 +269,7 @@ export default {
       arriveData,
       publicityData,
       theNotice,
+      theClubIntro,
     };
   },
   components: {
